@@ -2,16 +2,15 @@
   angular.module('intro') //getter syntax
   .controller('MainController', MainController);
 
-  MainController.$inject = ['$scope']; //what tools the MainController function need
+  MainController.$inject = ['$scope', 'TodoService']; //what tools the MainController function need
 
-  function MainController($scope){ //$scope is our bridge to the dom
-    console.log('Now Main Controlling..');
-    $scope.person = 'Bob';
-    $scope.letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
-    $scope.saySurprise = saySurprise;
+  function MainController($scope, TodoService){
+    $scope.todos = TodoService.get();
+    $scope.createTodo = createTodo;
 
-    function saySurprise(person){
-      alert('Hey ' + person + '... there is a clown behind you!');
+    function createTodo(newTodo){
+      TodoService.create(newTodo);
+      $scope.newTodo = '';
     }
   }
 })();
