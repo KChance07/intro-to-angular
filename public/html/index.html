@@ -4,13 +4,13 @@
     <title>Introduction to AngularJS</title>
   </head>
   <body>
-    <!--this connects the controller into the app-->
     <div ng-controller="MainController">
       <input type="text" ng-model='newTodo'>
       <button ng-click='createTodo(newTodo)'>Add New Todo</button>
       <ul>
         <li ng-repeat='todo in todos track by $index'>
-          {{ todo }}
+          <input type="text" ng-show='isEditing' ng-model='todo'>
+          {{ todo.desc }}
           <button ng-click='deleteTodo($index)'>&times;</button>
         </li>
       </ul>
